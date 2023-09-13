@@ -4,6 +4,7 @@ from action import Action
 from random import randint
 
 from agent_zach import AgentZach
+from agent_smith import AgentSmith
 
 
 class AgentRandom:
