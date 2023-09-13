@@ -7,7 +7,7 @@ from random import randint
 
 from agent_zach import AgentZach
 from agent_smith import AgentSmith
-
+from agent_happy import AgentHappy
 
 class AgentRandom:
     def __init__(self):
@@ -49,7 +49,7 @@ def save_agent(file_name, agent):
 def main():
     state = State(10, 10, 5)
 
-    agents = [AgentRandom(), AgentZach()]
+    agents = [AgentRandom(), AgentZach(), AgentHappy()]
     markers = ['?', 'z']
 
     agent_i = 0
