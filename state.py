@@ -15,13 +15,14 @@ class State:
         self.data[y*self.cols + x] = value
 
     def __repr__(self):
-        divider = '-' * self.cols
-        full = divider + '\n'
+        divider = '----' * self.cols + '-'
+        full = ''
         for x in range(self.rows-1, -1, -1):
             row = ''
             for y in range(self.cols):
-                row += self.read(x, y)
-            full += row + '\n'
+                row += '| ' + self.read(x, y) + ' '
+            row += '|'
+            full += divider + '\n' + row + '\n'
         full += divider
         return full
 

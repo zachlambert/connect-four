@@ -1,4 +1,5 @@
 
+import sys
 from state import State
 from action import Action
 import pickle
@@ -42,7 +43,7 @@ def save_agent(file_name, agent):
 def main():
     state = State(10, 10)
 
-    agent_pickles = [test_agent_file]
+    agent_pickles = sys.argv[1:]
     agents = [ManualAgent()]
     markers = ['x', 'o', '*', '?']
 
