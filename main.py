@@ -7,7 +7,9 @@ class RandomAgent:
     def __init__(self):
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
-        action = Action(0, 0)
+        action = Action()
+        action.x = 0
+        action.y = 0
         return action
 
 class ManualAgent:
@@ -34,16 +36,18 @@ class ManualAgent:
             break
         return action
 
+def save_agent(file_name, agent):
+    pickle.dump(agent, open(file_name, 'wb'))
+
 def main():
     state = State(10, 10)
 
-    agent_pickles = []
+    agent_pickles = [test_agent_file]
     agents = [ManualAgent()]
     markers = ['x', 'o', '*', '?']
 
     for file_name in agent_pickles:
-        # TODO: Check this is correct
-        agents.append(pickle.load(open(file_name, 'r')))
+        agents.append(pickle.load(open(file_name, 'rb')))
 
     agent_i = 0
     n = 0
@@ -55,11 +59,12 @@ def main():
         print(f'Agent {marker} makes action:')
         action = agent.compute_action(marker, state)
         if not state.action_valid(marker, action):
-            print('Invalid action')
+            print(f'Invalid action ({action.x}, {action.y})')
         else:
             print(f'Valid action ({action.x}, {action.y})')
         state.update(marker, action)
         input('Press enter to continue')
+        agent_i += 1
 
     pickle.load()
 
