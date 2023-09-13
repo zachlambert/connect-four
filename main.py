@@ -44,7 +44,7 @@ def save_agent(file_name, agent):
     pickle.dump(agent, open(file_name, 'wb'))
 
 def main():
-    state = State(10, 10, 3)
+    state = State(10, 10, 5)
 
     agent_pickles = sys.argv[1:]
     agents = [RandomAgent(), ZachAgent()]
