@@ -1,4 +1,5 @@
-from main import Action, State
+from action import Action
+from state import State
 
 class AgentSmith:
     def __init__(self):
