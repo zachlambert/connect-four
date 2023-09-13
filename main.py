@@ -1,3 +1,5 @@
+import os
+import time
 
 from state import State
 from action import Action
@@ -54,6 +56,7 @@ def main():
     n = 0
     valid_actions = 0
     while state.winner is None and valid_actions < state.rows*state.cols:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(f'Iteration {n}')
         print(state)
         marker = markers[agent_i]
@@ -68,6 +71,7 @@ def main():
         state.update(marker, action)
         agent_i = (agent_i + 1) % len(agents)
         n += 1
+        time.sleep(1)
 
     if state.winner is None:
         print('Game ended with no valid moves remaining and no winner')
