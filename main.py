@@ -5,8 +5,6 @@ from action import Action
 import pickle
 from random import randint
 
-from zach_agent import ZachAgent
-
 class RandomAgent:
     def __init__(self):
         pass
@@ -48,7 +46,7 @@ def main():
     state = State(10, 10)
 
     agent_pickles = sys.argv[1:]
-    agents = [ManualAgent(), RandomAgent()] #, ZachAgent()]
+    agents = [RandomAgent(), ManualAgent()]
     markers = ['x', 'o', '*', '?']
 
     for file_name in agent_pickles:
