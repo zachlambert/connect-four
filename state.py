@@ -26,7 +26,14 @@ class State:
         full += divider
         return full
 
+    def action_in_bounds(self, marker: chr, action: Action) -> bool:
+        if action.x < 0 or action.y < 0 or action.x >= self.cols or action.y >= self.rows:
+            return False
+        return True
+
     def action_valid(self, marker: chr, action: Action) -> bool:
+        if not self.action_in_bounds(chr, action):
+            return False
         if self.read(action.x, action.y) != ' ':
             return False
         return True

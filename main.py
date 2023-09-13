@@ -4,6 +4,8 @@ from state import State
 from action import Action
 import pickle
 
+from zach_agent import ZachAgent
+
 class RandomAgent:
     def __init__(self):
         pass
@@ -16,7 +18,7 @@ class ManualAgent:
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
         valid = False
-        print(f'Size: (state.cols, state.rows)')
+        print(f'Size: ({state.cols}, {state.rows})')
         action = Action(0,0)
         while True:
             try:
@@ -42,7 +44,7 @@ def main():
     state = State(10, 10)
 
     agent_pickles = sys.argv[1:]
-    agents = [ManualAgent()]
+    agents = [ManualAgent(), ZachAgent()]
     markers = ['x', 'o', '*', '?']
 
     for file_name in agent_pickles:
