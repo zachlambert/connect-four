@@ -17,9 +17,9 @@ class State:
     def __repr__(self):
         divider = '----' * self.cols + '-'
         full = ''
-        for x in range(self.rows-1, -1, -1):
+        for y in range(self.rows-1, -1, -1):
             row = ''
-            for y in range(self.cols):
+            for x in range(self.cols):
                 row += '| ' + self.read(x, y) + ' '
             row += '|'
             full += divider + '\n' + row + '\n'

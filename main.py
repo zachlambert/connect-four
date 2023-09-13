@@ -3,6 +3,7 @@ import sys
 from state import State
 from action import Action
 import pickle
+from random import randint
 
 from zach_agent import ZachAgent
 
@@ -10,7 +11,10 @@ class RandomAgent:
     def __init__(self):
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
-        action = Action(0,0)
+        while True:
+            action = Action(randint(0, state.cols-1), randint(0, state.rows-1))
+            if state.action_valid(marker, action):
+                break
         return action
 
 class ManualAgent:
@@ -44,7 +48,7 @@ def main():
     state = State(10, 10)
 
     agent_pickles = sys.argv[1:]
-    agents = [ManualAgent(), ZachAgent()]
+    agents = [ManualAgent(), RandomAgent()] #, ZachAgent()]
     markers = ['x', 'o', '*', '?']
 
     for file_name in agent_pickles:
@@ -52,7 +56,8 @@ def main():
 
     agent_i = 0
     n = 0
-    while state.winner is None:
+    valid_actions = 0
+    while state.winner is None and valid_actions < state.rows*state.cols:
         print(f'Iteration {n}')
         print(state)
         marker = markers[agent_i]
@@ -63,15 +68,15 @@ def main():
             print(f'Invalid action ({action.x}, {action.y})')
         else:
             print(f'Valid action ({action.x}, {action.y})')
+            valid_actions += 1
         state.update(marker, action)
-        input('Press enter to continue')
         agent_i = (agent_i + 1) % len(agents)
+        n += 1
 
-    pickle.load()
-
-    print(state)
-    state.update('x', RandomAgent().compute_action('x', state))
-    print(state)
+    if state.winner is None:
+        print('Game ended with no valid moves remaining and no winner')
+    else:
+        print(f'Game ended with winner {state.winner}')
 
 if __name__ == "__main__":
     main()
