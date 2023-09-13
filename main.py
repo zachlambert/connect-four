@@ -8,9 +8,7 @@ class RandomAgent:
     def __init__(self):
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
-        action = Action()
-        action.x = 0
-        action.y = 0
+        action = Action(0,0)
         return action
 
 class ManualAgent:
@@ -19,7 +17,7 @@ class ManualAgent:
     def compute_action(self, marker: chr, state: State) -> Action:
         valid = False
         print(f'Size: (state.cols, state.rows)')
-        action = Action()
+        action = Action(0,0)
         while True:
             try:
                 coords = [int(char) for char in input().split(' ')]
