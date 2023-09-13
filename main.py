@@ -4,6 +4,7 @@ from state import State
 from action import Action
 import pickle
 from random import randint
+from zach_agent import ZachAgent
 
 class RandomAgent:
     def __init__(self):
@@ -43,10 +44,10 @@ def save_agent(file_name, agent):
     pickle.dump(agent, open(file_name, 'wb'))
 
 def main():
-    state = State(10, 10)
+    state = State(10, 10, 3)
 
     agent_pickles = sys.argv[1:]
-    agents = [RandomAgent(), ManualAgent()]
+    agents = [RandomAgent(), ZachAgent()]
     markers = ['x', 'o', '*', '?']
 
     for file_name in agent_pickles:

@@ -2,9 +2,10 @@
 from action import Action
 
 class State:
-    def __init__(self, rows, cols):
+    def __init__(self, rows, cols, win_count):
         self.rows = rows
         self.cols = cols
+        self.win_count = win_count
         self.data = [' ' for i in range(rows * cols)]
         self.winner = None
 
@@ -41,8 +42,30 @@ class State:
     def update(self, marker: chr, action: Action):
         self.write(action.x, action.y, marker)
 
-        # TODO: Check if there is a winner
-        # Set winner to the marker of the winner
-        winner = None
+        deltas = [
+            (1, 0),
+            (1, 1),
+            (0, 1),
+            (-1, 1),
+            (-1, 0),
+            (-1, -1),
+            (0, -1),
+            (1, -1)
+        ]
+        for delta in deltas:
+            x = action.x
+            y = action.y
+            count = 0
+            while count < self.win_count:
+                x += delta[0]
+                y += delta[1]
+                if x < 0 or y < 0 or x >= self.cols or y >= self.rows:
+                    break
+                if self.read(x, y) != marker:
+                    break
+                count += 1
+            if count == self.win_count:
+                self.winner = marker
+                break
 
         return True
