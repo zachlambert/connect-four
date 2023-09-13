@@ -1,11 +1,12 @@
 
-import sys
 from state import State
 from action import Action
-import pickle
 from random import randint
 
-class RandomAgent:
+from agent_zach import AgentZach
+
+
+class AgentRandom:
     def __init__(self):
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
@@ -15,7 +16,7 @@ class RandomAgent:
                 break
         return action
 
-class ManualAgent:
+class AgentManual:
     def __init__(self):
         pass
     def compute_action(self, marker: chr, state: State) -> Action:
@@ -45,12 +46,8 @@ def save_agent(file_name, agent):
 def main():
     state = State(10, 10, 5)
 
-    agent_pickles = sys.argv[1:]
-    agents = [RandomAgent(), ManualAgent()]
-    markers = ['x', 'o', '*', '?']
-
-    for file_name in agent_pickles:
-        agents.append(pickle.load(open(file_name, 'rb')))
+    agents = [AgentRandom(), AgentZach()]
+    markers = ['?', 'z']
 
     agent_i = 0
     n = 0
