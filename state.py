@@ -6,7 +6,6 @@ class State:
         self.rows = rows
         self.cols = cols
         self.data = [' ' for i in range(rows * cols)]
-        self.height = [' ' for i in range(cols)]
         self.winner = None
 
     def read(self, x, y) -> chr:
@@ -26,9 +25,12 @@ class State:
         full += divider
         return full
 
-    def update(self, marker: chr, action: Action) -> bool:
+    def action_valid(self, marker: chr, action: Action) -> bool:
         if self.read(action.x, action.y) != ' ':
             return False
+        return True
+
+    def update(self, marker: chr, action: Action):
         self.write(action.x, action.y, marker)
 
         # TODO: Check if there is a winner
