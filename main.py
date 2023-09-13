@@ -63,7 +63,7 @@ def main():
             print(f'Valid action ({action.x}, {action.y})')
         state.update(marker, action)
         input('Press enter to continue')
-        agent_i += 1
+        agent_i = (agent_i + 1) % len(agents)
 
     pickle.load()
 
